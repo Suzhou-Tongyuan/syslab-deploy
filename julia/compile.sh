@@ -1,0 +1,1 @@
+scc build.jl --mode shared -c -d ../native/syslabcc_lib/syslabcc_lib/ --no-blas
