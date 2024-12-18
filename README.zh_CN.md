@@ -10,6 +10,7 @@ Syslab Deploy 是一个模板项目，可以将 Syslab/Julia 编写的程序集�
 
 - 开箱即用支持 Windows/macOS/Linux/Android (iOS 尚未测试)
 - 一行命令将 Julia 代码编译为对应平台的动态库
+- 支持32位 ARM 嵌入式设备 (该功能被 Flutter Android 调试构建使用)
 
 ## 使用
 

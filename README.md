@@ -11,6 +11,7 @@ Features:
 - Out-of-the-box support for Windows, macOS, Linux and Android (iOS not tested)
 - One line build command to compile Julia code into a static library for each
   platform
+- Support 32-bit ARM embedded devices (used by Flutter Android debug build)
 
 ## Usage
 
