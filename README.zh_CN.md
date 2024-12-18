@@ -50,3 +50,15 @@ Syslab Deploy 是一个模板项目，可以将 Syslab/Julia 编写的程序集�
   此项目使用标准的 `rinf` 结构，实现了 Flutter 与 Julia 导出函数的操作交互。
 
 - `lib/`: 实际的 Flutter 项目，调用 Julia 库编写应用。
+
+
+## 局限性
+
+**在 Android/iOS 或嵌入式平台上，Julia 代码无法开箱即用地访问 BLAS 相关功能。**
+
+Julia 大量使用非 Julia 原生程序创建的动态链接库，这在迁移 Julia 代码至 Android/iOS 或其他嵌入式设备时存在问题。该项问题是此项目调用 SyslabCC 编译器时指定 `--no-blas` 的原因。
+
+为了使用 BLAS 相关的功能，需要为以下的原生依赖项创建平台特定的二进制：
+
+- https://github.com/JuliaLinearAlgebra/libblastrampoline
+- https://github.com/OpenMathLib/OpenBLAS

@@ -54,3 +54,14 @@ Features:
 
 - `lib/`: This is the actual Flutter project which calls functions exported from
   your Julia library.
+
+## Limitations
+
+**Julia programs bundled with Syslab Deploy do not have out-of-the-box support for BLAS-related functionalities on Android, iOS, or other embedded platforms.**
+
+Julia heavily uses shared libraries created by non-Julia programs, which is tricky to support when migrating the codebase to Android/iOS and embedded devices. This is the reason why we use `--no-blas` option for SyslabCC.
+
+To use BLAS-related functionalties, you need to create platform-specific binaries for the following native dependencies:
+
+- https://github.com/JuliaLinearAlgebra/libblastrampoline
+- https://github.com/OpenMathLib/OpenBLAS
