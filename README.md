@@ -1,3 +1,6 @@
+
+[![中文](https://img.shields.io/badge/中文-README-orange.svg)](https://github.com/Suzhou-Tongyuan/syslab-deploy/blob/main/README.zh_CN.md) [![构建说明](https://img.shields.io/badge/中文-构建说明-blue.svg)](https://github.com/Suzhou-Tongyuan/syslab-deploy/blob/main/STEP.zh_CN.md)
+
 # Syslab Deploy
 
 Syslab Deploy is a template project for integrating Syslab/Julia programs into
