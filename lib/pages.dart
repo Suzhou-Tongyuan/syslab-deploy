@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:math';
 
 import 'package:fl_heatmap/fl_heatmap.dart';
 import 'package:flutter/material.dart';
@@ -291,6 +292,8 @@ class HeatmapView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final resp = Provider.of<SimulationResponse>(context);
+    final timeAxisHeight =
+        min(50.toDouble(), MediaQuery.of(context).size.height * 0.05);
 
     return ChangeNotifierProvider(
       key: ValueKey(resp),
@@ -302,30 +305,39 @@ class HeatmapView extends StatelessWidget {
         }
         return Column(
           children: [
-            Expanded(child: Heatmap(heatmapData: data)),
-            const Divider(),
+            Expanded(child: LayoutBuilder(builder: (context, constraints) {
+              final width = min(constraints.maxHeight, constraints.maxWidth);
+              return SizedBox.square(
+                dimension: width,
+                child: Heatmap(heatmapData: data),
+              );
+            })),
+            const Divider(height: 1),
             // a slide that controls the selectedT
-            Row(
-              children: [
-                const SizedBox(width: 10),
-                const Text("N(t)"),
-                const SizedBox(width: 10),
-                Expanded(
-                  child: SizedBox(
-                    height: 70,
-                    child: Slider(
-                      label: "N(t): ${cache.selectedT}",
-                      min: 0,
-                      max: resp.value.n_t.toDouble() + 1,
-                      value: cache.selectedT.toDouble(),
-                      onChanged: (value) {
-                        final index = value.toInt().clamp(0, resp.value.n_t);
-                        cache.selectedT = index;
-                      },
+            SizedBox(
+              height: timeAxisHeight + 10,
+              child: Row(
+                children: [
+                  const SizedBox(width: 10),
+                  const Text("N(t)"),
+                  const SizedBox(width: 10),
+                  Expanded(
+                    child: SizedBox(
+                      height: timeAxisHeight,
+                      child: Slider(
+                        label: "N(t): ${cache.selectedT}",
+                        min: 0,
+                        max: resp.value.n_t.toDouble() + 1,
+                        value: cache.selectedT.toDouble(),
+                        onChanged: (value) {
+                          final index = value.toInt().clamp(0, resp.value.n_t);
+                          cache.selectedT = index;
+                        },
+                      ),
                     ),
                   ),
-                ),
-              ],
+                ],
+              ),
             )
           ],
         );
